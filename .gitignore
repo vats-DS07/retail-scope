@@ -1,0 +1,16 @@
+# Python
+__pycache__/
+*.pyc
+venv/
+.venv/
+
+# The uncompressed cleaned CSV is ~160 MB, above GitHub's 100 MB file limit.
+# The compressed copy (cleaned_dataset.csv.gz) is committed instead and
+# pandas reads it directly. Run `python main.py` to recreate the plain CSV.
+dataset/cleaned_dataset.csv
+
+# OS / editor
+.DS_Store
+Thumbs.db
+.vscode/
+.idea/

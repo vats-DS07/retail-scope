@@ -1,0 +1,15 @@
+Metric,Before,After,Note
+Total rows,1067371.0,1033036.0,Sheet overlap and exact duplicates removed
+Columns,8.0,21.0,13 derived/flag columns added
+Missing descriptions,4382.0,0.0,Filled from same StockCode or 'UNKNOWN'
+Missing Customer IDs,243007.0,235151.0,Kept and flagged (HasCustomerID)
+Duplicate rows,34335.0,2.0,Remaining rows differed only by description spelling
+Negative-quantity rows,22950.0,22496.0,"Kept and classified, not deleted"
+Zero/negative price rows,6207.0,6019.0,
+Unique invoices,53628.0,53628.0,
+Unique stock codes,5305.0,5131.0,Lower/upper-case variants merged
+Unique countries,43.0,43.0,"EIRE, RSA, USA renamed to full names"
+Minimum quantity,-80995.0,-80995.0,
+Maximum quantity,80995.0,80995.0,
+Minimum price (£),-53594.36,-53594.36,
+Maximum price (£),38970.0,38970.0,

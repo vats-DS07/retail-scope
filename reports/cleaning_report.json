@@ -1,0 +1,219 @@
+{
+  "generated": "2026-11-17 19:34",
+  "source_file": "original_dataset.xlsx",
+  "sheets": {
+    "Year 2009-2010": {
+      "rows": 525461,
+      "start": "2009-12-01 07:45:00",
+      "end": "2010-12-09 20:01:00"
+    },
+    "Year 2010-2011": {
+      "rows": 541910,
+      "start": "2010-12-01 08:26:00",
+      "end": "2011-12-09 12:50:00"
+    }
+  },
+  "raw_profile": {
+    "rows": 1067371,
+    "columns": 8,
+    "missing_description": 4382,
+    "missing_customer_id": 243007,
+    "duplicate_rows": 34335,
+    "negative_quantity_rows": 22950,
+    "zero_or_negative_price_rows": 6207,
+    "unique_invoices": 53628,
+    "unique_stock_codes": 5305,
+    "unique_countries": 43,
+    "quantity_min": -80995.0,
+    "quantity_max": 80995.0,
+    "price_min": -53594.36,
+    "price_max": 38970.0
+  },
+  "clean_profile": {
+    "rows": 1033036,
+    "columns": 21,
+    "missing_description": 0,
+    "missing_customer_id": 235151,
+    "duplicate_rows": 2,
+    "negative_quantity_rows": 22496,
+    "zero_or_negative_price_rows": 6019,
+    "unique_invoices": 53628,
+    "unique_stock_codes": 5131,
+    "unique_countries": 43,
+    "quantity_min": -80995.0,
+    "quantity_max": 80995.0,
+    "price_min": -53594.36,
+    "price_max": 38970.0
+  },
+  "raw_dtypes": {
+    "Invoice": "object",
+    "StockCode": "object",
+    "Description": "object",
+    "Quantity": "int64",
+    "InvoiceDate": "datetime64[us]",
+    "Price": "float64",
+    "Customer ID": "float64",
+    "Country": "str"
+  },
+  "clean_dtypes": {
+    "Invoice": "str",
+    "StockCode": "str",
+    "Description": "string",
+    "Quantity": "int64",
+    "InvoiceDate": "datetime64[us]",
+    "Price": "float64",
+    "CustomerID": "string",
+    "Country": "str",
+    "Revenue": "float64",
+    "TransactionType": "str",
+    "IsCancelled": "bool",
+    "IsProduct": "bool",
+    "HasCustomerID": "bool",
+    "QuantityOutlier": "bool",
+    "PriceOutlier": "bool",
+    "Year": "int32",
+    "Month": "int32",
+    "YearMonth": "str",
+    "Quarter": "str",
+    "DayOfWeek": "str",
+    "Hour": "int32"
+  },
+  "missing_raw": {
+    "Invoice": {
+      "missing": 0,
+      "percent": 0.0
+    },
+    "StockCode": {
+      "missing": 0,
+      "percent": 0.0
+    },
+    "Description": {
+      "missing": 4382,
+      "percent": 0.41
+    },
+    "Quantity": {
+      "missing": 0,
+      "percent": 0.0
+    },
+    "InvoiceDate": {
+      "missing": 0,
+      "percent": 0.0
+    },
+    "Price": {
+      "missing": 0,
+      "percent": 0.0
+    },
+    "Customer ID": {
+      "missing": 243007,
+      "percent": 22.77
+    },
+    "Country": {
+      "missing": 0,
+      "percent": 0.0
+    }
+  },
+  "overlap_rows_removed": 22523,
+  "overlap_identical": true,
+  "duplicates_removed": 11812,
+  "country_fixes": {
+    "EIRE": 17667,
+    "RSA": 169,
+    "USA": 535
+  },
+  "multi_description_codes": 597,
+  "descriptions_standardised": 59071,
+  "descriptions_filled": 3909,
+  "descriptions_unknown": 366,
+  "transaction_types": {
+    "Sale": 1007912,
+    "Cancellation": 19104,
+    "Stock Adjustment": 3393,
+    "Zero-Price Entry": 2621,
+    "Bad Debt Adjustment": 6
+  },
+  "cancellation_rows": 19104,
+  "cancellation_invoices": 8292,
+  "non_product_rows": 5818,
+  "missing_customer_rows": 235151,
+  "missing_customer_sales_revenue": 3090394.12,
+  "quantity_iqr_upper": 28.5,
+  "price_iqr_upper": 8.45,
+  "quantity_outliers": 53019,
+  "price_outliers": 75064,
+  "csv_size_mb": 165.2,
+  "gz_size_mb": 19.5,
+  "steps": [
+    {
+      "step": "4",
+      "action": "Removed sheet-overlap rows (1-9 Dec 2010)",
+      "rows_before": 1067371,
+      "rows_after": 1044848,
+      "rows_changed": 22523,
+      "reason": "Both Excel sheets contain the same transactions for 1-9 December 2010 (verified identical). Keeping both copies would double-count that period."
+    },
+    {
+      "step": "5",
+      "action": "Removed exact duplicate rows",
+      "rows_before": 1044848,
+      "rows_after": 1033036,
+      "rows_changed": 11812,
+      "reason": "Rows identical in every column (same invoice, product, quantity, price, timestamp and customer) are treated as accidental double entries."
+    },
+    {
+      "step": "6",
+      "action": "Standardised column names and data types",
+      "rows_before": 1033036,
+      "rows_after": 1033036,
+      "rows_changed": 0,
+      "reason": "CustomerID converted from float (13085.0) to text ID (13085); Invoice and StockCode stored as text; StockCode upper-cased (e.g. 'm' -> 'M')."
+    },
+    {
+      "step": "7a",
+      "action": "Standardised country names",
+      "rows_before": 1033036,
+      "rows_after": 1033036,
+      "rows_changed": 0,
+      "reason": "EIRE -> Ireland, RSA -> South Africa, USA -> United States (18,371 rows). 'Unspecified' kept as-is."
+    },
+    {
+      "step": "7b",
+      "action": "Standardised product descriptions",
+      "rows_before": 1033036,
+      "rows_after": 1033036,
+      "rows_changed": 0,
+      "reason": "597 stock codes had several spellings; each now uses its most frequent sales description. 3,909 missing descriptions were filled from the same StockCode (not invented); 366 with no match were labelled 'UNKNOWN'."
+    },
+    {
+      "step": "8",
+      "action": "Classified rows into transaction types (no rows deleted)",
+      "rows_before": 1033036,
+      "rows_after": 1033036,
+      "rows_changed": 0,
+      "reason": "Negative quantities were NOT blindly deleted. 'C' invoices are cancellations/returns and are kept as negative revenue so they offset the original sale. Negative rows with price 0 are internal stock write-offs (damaged, lost). 'A' invoices are bad-debt accounting entries. Postage, fees and manual codes are flagged IsProduct = False."
+    },
+    {
+      "step": "9",
+      "action": "Created derived columns",
+      "rows_before": 1033036,
+      "rows_after": 1033036,
+      "rows_changed": 0,
+      "reason": "Revenue = Quantity x Price (negative for cancellations). Date parts allow monthly, weekday and hourly analysis."
+    },
+    {
+      "step": "10",
+      "action": "Kept rows with missing CustomerID (flagged)",
+      "rows_before": 1033036,
+      "rows_after": 1033036,
+      "rows_changed": 0,
+      "reason": "235,151 rows have no CustomerID (guest or unrecorded purchases). They are real sales, so they stay in revenue, product and country analysis but are excluded from customer-level analysis. No IDs were invented."
+    },
+    {
+      "step": "11",
+      "action": "Flagged outliers with the IQR rule (kept, not deleted)",
+      "rows_before": 1033036,
+      "rows_after": 1033036,
+      "rows_changed": 0,
+      "reason": "Quantity > 28 units flags 53,019 sale lines; price > \u00a38.45 flags 75,064. This is a wholesale business, so large orders are genuine and are kept. The two extreme orders (80,995 and 74,215 units) were each cancelled the same day; because cancellations are kept as negative revenue they cancel out in net figures."
+    }
+  ]
+}

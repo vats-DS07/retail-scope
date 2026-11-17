@@ -1,0 +1,428 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <title>RetailScope | Online Retail II - Data Cleaning & Visualization</title>
+  <meta name="description" content="Foundation of Data Science capstone: cleaning and analysing the UCI Online Retail II dataset with Python, Pandas and Matplotlib.">
+  <link rel="icon" href="assets/favicon.svg" type="image/svg+xml">
+  <link rel="stylesheet" href="style.css">
+</head>
+<body>
+  <!-- ============ SIDEBAR NAVIGATION ============ -->
+  <aside class="sidebar" id="sidebar">
+    <a class="brand" href="#home">
+      <img src="assets/favicon.svg" alt="" width="34" height="34">
+      <span><strong>RetailScope</strong><small>Online Retail II</small></span>
+    </a>
+    <nav class="nav" aria-label="Main">
+      <a href="#home" data-page="home"><svg viewBox="0 0 24 24"><path d="M3 11l9-7 9 7v9a1 1 0 0 1-1 1h-5v-6H9v6H4a1 1 0 0 1-1-1z"/></svg>Overview</a>
+      <a href="#cleaning" data-page="cleaning"><svg viewBox="0 0 24 24"><path d="M4 4h16l-6 8v6l-4 2v-8z"/></svg>Data Cleaning</a>
+      <a href="#eda" data-page="eda"><svg viewBox="0 0 24 24"><circle cx="11" cy="11" r="6"/><path d="M20 20l-4.5-4.5"/></svg>Exploratory Analysis</a>
+      <a href="#dashboard" data-page="dashboard"><svg viewBox="0 0 24 24"><rect x="3" y="3" width="7" height="9" rx="1.5"/><rect x="14" y="3" width="7" height="5" rx="1.5"/><rect x="14" y="12" width="7" height="9" rx="1.5"/><rect x="3" y="16" width="7" height="5" rx="1.5"/></svg>Dashboard</a>
+      <a href="#insights" data-page="insights"><svg viewBox="0 0 24 24"><path d="M9 18h6M10 21h4M12 3a6 6 0 0 0-4 10.5c.8.8 1 1.5 1 2.5h6c0-1 .2-1.7 1-2.5A6 6 0 0 0 12 3z"/></svg>Insights</a>
+      <a href="#about" data-page="about"><svg viewBox="0 0 24 24"><circle cx="12" cy="12" r="9"/><path d="M12 11v6M12 7.5v.5"/></svg>About Project</a>
+    </nav>
+    <div class="sidebar-foot">
+      <span class="dot"></span> Built with Python, Pandas &amp; Matplotlib
+    </div>
+  </aside>
+
+  <header class="topbar">
+    <a class="brand" href="#home"><img src="assets/favicon.svg" alt="" width="28" height="28"><strong>RetailScope</strong></a>
+    <button class="menu-btn" id="menuBtn" aria-label="Open menu" aria-expanded="false">
+      <svg viewBox="0 0 24 24"><path d="M4 7h16M4 12h16M4 17h16"/></svg>
+    </button>
+  </header>
+  <div class="overlay" id="overlay"></div>
+
+  <main class="content">
+
+    <!-- ================= PAGE 1: HOME ================= -->
+    <section class="page" id="page-home">
+      <div class="hero">
+        <span class="eyebrow">Foundation of Data Science · Capstone Project</span>
+        <h1>Cleaning and visualizing <span class="grad">two years of online retail</span></h1>
+        <p class="lead">A complete data-science workflow on the <strong>UCI Online Retail II</strong> dataset: over one million
+          real transactions from a UK-based online gift wholesaler. The raw Excel file is cleaned with Pandas,
+          explored with descriptive statistics, and every chart on this site is produced by Matplotlib.</p>
+        <div class="hero-actions">
+          <a class="btn primary" href="#dashboard">Open the dashboard</a>
+          <a class="btn ghost" href="#cleaning">See how the data was cleaned</a>
+        </div>
+      </div>
+
+      <div class="kpi-grid" id="homeStats"></div>
+
+      <div class="grid-2">
+        <div class="card">
+          <h2 class="card-title"><span class="ic blue">◎</span>Project objectives</h2>
+          <ul class="checklist">
+            <li>Load and inspect a large, real-world transactional dataset.</li>
+            <li>Find and fix data-quality problems: duplicates, missing values, inconsistent names, cancellations and outliers.</li>
+            <li>Create useful derived variables such as revenue and date parts.</li>
+            <li>Describe sales, products, customers and countries with descriptive statistics.</li>
+            <li>Communicate the results with clear Matplotlib charts and a static website.</li>
+            <li>Turn the analysis into practical business recommendations.</li>
+          </ul>
+        </div>
+        <div class="card">
+          <h2 class="card-title"><span class="ic purple">▤</span>Dataset at a glance</h2>
+          <table class="kv" id="datasetInfo"></table>
+        </div>
+      </div>
+
+      <div class="card">
+        <h2 class="card-title"><span class="ic teal">↻</span>Project workflow</h2>
+        <ol class="workflow">
+          <li><span>1</span><strong>Collect</strong><small>Original Excel file, two yearly sheets</small></li>
+          <li><span>2</span><strong>Inspect</strong><small>Shape, types, missing values, duplicates</small></li>
+          <li><span>3</span><strong>Clean</strong><small>Pandas script with a logged decision for each step</small></li>
+          <li><span>4</span><strong>Analyse</strong><small>Statistics, trends, Pareto, correlation</small></li>
+          <li><span>5</span><strong>Visualise</strong><small>40 PNG charts made with Matplotlib</small></li>
+          <li><span>6</span><strong>Publish</strong><small>HTML, CSS and JavaScript site on GitHub Pages</small></li>
+        </ol>
+      </div>
+
+      <div class="nav-cards">
+        <a class="nav-card" href="#cleaning"><span class="ic blue">⌁</span><strong>Data Cleaning</strong><small>12 documented steps, before vs after</small></a>
+        <a class="nav-card" href="#eda"><span class="ic purple">◔</span><strong>Exploratory Analysis</strong><small>13 charts with explanations</small></a>
+        <a class="nav-card" href="#dashboard"><span class="ic teal">▦</span><strong>Dashboard</strong><small>Filter by year, search products</small></a>
+        <a class="nav-card" href="#insights"><span class="ic green">✦</span><strong>Insights</strong><small>Findings and recommendations</small></a>
+      </div>
+    </section>
+
+    <!-- ================= PAGE 2: DATA CLEANING ================= -->
+    <section class="page" id="page-cleaning">
+      <header class="page-head">
+        <span class="eyebrow">Page 2</span>
+        <h1>Data Cleaning &amp; Preprocessing</h1>
+        <p>All steps run in <code>analysis/data_cleaning.py</code>. The original Excel file is never changed; the cleaned
+          result is saved as a new CSV. Negative quantities and missing customers are <em>classified and flagged</em>, not blindly deleted.</p>
+      </header>
+
+      <div class="kpi-grid" id="cleanStats"></div>
+
+      <div class="card">
+        <h2 class="card-title">Original dataset overview</h2>
+        <p class="muted">The Excel workbook contains two sheets with the same 8 columns. The table shows each column's type
+          when read by Pandas and after cleaning.</p>
+        <div class="grid-2 tight">
+          <div class="table-wrap"><table class="data" id="sheetTable"></table></div>
+          <div class="table-wrap"><table class="data" id="dtypeTable"></table></div>
+        </div>
+      </div>
+
+      <div class="grid-2">
+        <figure class="chart-card" data-chart="cleaning-0"></figure>
+        <div class="card">
+          <h2 class="card-title">Missing value analysis</h2>
+          <div class="table-wrap"><table class="data" id="missingTable"></table></div>
+          <p class="note" id="missingNote"></p>
+        </div>
+      </div>
+
+      <div class="grid-2">
+        <div class="card">
+          <h2 class="card-title">Duplicate analysis</h2>
+          <p id="dupText"></p>
+          <div class="mini-stats" id="dupStats"></div>
+        </div>
+        <figure class="chart-card" data-chart="cleaning-1"></figure>
+      </div>
+
+      <div class="card">
+        <h2 class="card-title">Cleaning operations, step by step</h2>
+        <ol class="timeline" id="stepList"></ol>
+      </div>
+
+      <div class="grid-2">
+        <figure class="chart-card" data-chart="cleaning-2"></figure>
+        <div class="card">
+          <h2 class="card-title">How cancellations and returns were treated</h2>
+          <ul class="checklist">
+            <li><strong>Invoices starting with "C"</strong> are cancellations or returns. They are kept with negative
+              quantity and negative revenue, so adding up revenue gives true <em>net</em> revenue.</li>
+            <li><strong>Negative quantities without "C"</strong> have a price of £0 and notes like "damaged" or "missing".
+              They are internal stock write-offs, labelled <em>Stock Adjustment</em>, and left out of sales figures.</li>
+            <li><strong>Invoices starting with "A"</strong> are bad-debt accounting entries (6 rows) and are excluded from sales.</li>
+            <li><strong>Postage, fees and manual codes</strong> (POST, DOT, M, AMAZONFEE...) are flagged
+              <code>IsProduct = False</code> so they do not distort product rankings.</li>
+          </ul>
+        </div>
+      </div>
+
+      <div class="card">
+        <h2 class="card-title">Before-and-after comparison</h2>
+        <div class="table-wrap"><table class="data" id="beforeAfter"></table></div>
+      </div>
+
+      <div class="card">
+        <div class="card-head">
+          <h2 class="card-title">Data dictionary (cleaned dataset)</h2>
+          <input class="search" id="dictSearch" type="search" placeholder="Search columns…" aria-label="Search data dictionary">
+        </div>
+        <div class="table-wrap"><table class="data" id="dictTable"></table></div>
+      </div>
+    </section>
+
+    <!-- ================= PAGE 3: EDA ================= -->
+    <section class="page" id="page-eda">
+      <header class="page-head">
+        <span class="eyebrow">Page 3</span>
+        <h1>Exploratory Data Analysis</h1>
+        <p>Statistics are computed with Pandas in <code>analysis/exploratory_analysis.py</code>. Every chart below is a PNG
+          produced by Matplotlib from the cleaned data. Revenue figures are <em>net</em> (sales minus cancellations) for
+          product lines only. Click a chart to enlarge it.</p>
+      </header>
+
+      <div class="card">
+        <div class="card-head">
+          <h2 class="card-title">Statistical summary</h2>
+          <span class="pill">pandas .describe() + skewness</span>
+        </div>
+        <div class="table-wrap"><table class="data num" id="statsTable"></table></div>
+        <p class="note">Every variable has a mean far above its median and a large positive skewness. The data is
+          strongly right-skewed, so medians and log-scaled charts describe a "typical" order better than averages.</p>
+      </div>
+
+      <div class="filter-bar" id="edaFilters" role="tablist" aria-label="Chart topic">
+        <button class="chip active" data-group="all">All charts</button>
+        <button class="chip" data-group="trend">Trends</button>
+        <button class="chip" data-group="product">Products</button>
+        <button class="chip" data-group="customer">Customers</button>
+        <button class="chip" data-group="country">Countries</button>
+        <button class="chip" data-group="distribution">Distributions</button>
+        <button class="chip" data-group="correlation">Correlation</button>
+        <button class="chip" data-group="cancellation">Cancellations</button>
+      </div>
+      <div class="chart-grid" id="edaCharts"></div>
+
+      <div class="card">
+        <div class="card-head">
+          <h2 class="card-title">Correlation matrix (customer level)</h2>
+          <div class="toggle" id="corrToggle">
+            <button class="active" data-method="spearman">Spearman</button>
+            <button data-method="pearson">Pearson</button>
+          </div>
+        </div>
+        <div class="table-wrap"><table class="data num corr" id="corrTable"></table></div>
+        <p class="note">Pearson measures straight-line relationships and is sensitive to extreme values; Spearman uses
+          ranks and is more reliable for skewed data like this. Compare both to see the effect of outliers.</p>
+      </div>
+    </section>
+
+    <!-- ================= PAGE 4: DASHBOARD ================= -->
+    <section class="page" id="page-dashboard">
+      <header class="page-head row">
+        <div>
+          <span class="eyebrow">Page 4</span>
+          <h1>Interactive Dashboard</h1>
+          <p id="periodLabel" class="muted"></p>
+        </div>
+        <div class="toggle big" id="periodToggle" aria-label="Select period">
+          <button class="active" data-period="all">All</button>
+          <button data-period="2010">2010</button>
+          <button data-period="2011">2011</button>
+        </div>
+      </header>
+
+      <div class="kpi-grid six" id="dashKpis"></div>
+      <div class="kpi-grid secondary" id="dashKpis2"></div>
+
+      <div class="filter-bar" id="dashFilters">
+        <button class="chip active" data-group="all">All charts</button>
+        <button class="chip" data-group="trend">Trends</button>
+        <button class="chip" data-group="product">Products</button>
+        <button class="chip" data-group="country">Countries</button>
+        <button class="chip" data-group="customer">Customers</button>
+        <button class="chip" data-group="distribution">Sales distribution</button>
+        <button class="chip" data-group="cancellation">Cancellations</button>
+      </div>
+      <div class="chart-grid" id="dashCharts"></div>
+
+      <div class="card">
+        <div class="card-head">
+          <h2 class="card-title">Product explorer</h2>
+          <div class="controls">
+            <input class="search" id="productSearch" type="search" placeholder="Search product name or code…" aria-label="Search products">
+            <select id="productSort" aria-label="Sort products">
+              <option value="revenue">Sort: Net revenue</option>
+              <option value="units">Sort: Units</option>
+              <option value="orders">Sort: Orders</option>
+              <option value="customers">Sort: Customers</option>
+              <option value="cancelled">Sort: Cancelled units</option>
+              <option value="revenue-asc">Sort: Lowest revenue</option>
+            </select>
+          </div>
+        </div>
+        <p class="muted small">Tick up to two products to compare them side by side.</p>
+        <div id="compareBox" class="compare" hidden></div>
+        <div class="table-wrap"><table class="data num" id="productTable"></table></div>
+        <div class="table-foot"><span id="productCount"></span><button class="btn ghost sm" id="productMore">Show more</button></div>
+      </div>
+
+      <div class="grid-2">
+        <div class="card">
+          <div class="card-head">
+            <h2 class="card-title">Country performance</h2>
+            <input class="search" id="countrySearch" type="search" placeholder="Filter countries…" aria-label="Filter countries">
+          </div>
+          <div class="table-wrap scroll"><table class="data num" id="countryTable"></table></div>
+        </div>
+        <div class="card">
+          <h2 class="card-title">Monthly figures</h2>
+          <div class="table-wrap scroll"><table class="data num" id="monthTable"></table></div>
+        </div>
+      </div>
+    </section>
+
+    <!-- ================= PAGE 5: INSIGHTS ================= -->
+    <section class="page" id="page-insights">
+      <header class="page-head">
+        <span class="eyebrow">Page 5</span>
+        <h1>Insights &amp; Conclusion</h1>
+        <p>Each finding below is generated from the analysis results, so the numbers always match the charts.</p>
+      </header>
+
+      <h2 class="section-title">Major findings</h2>
+      <div class="finding-grid" id="findings"></div>
+
+      <div class="grid-2">
+        <div class="card">
+          <h2 class="card-title"><span class="ic teal">↗</span>Important trends</h2>
+          <ul class="checklist" id="trendList"></ul>
+        </div>
+        <div class="card">
+          <h2 class="card-title"><span class="ic purple">✧</span>Interesting discoveries</h2>
+          <ul class="checklist">
+            <li>The two Excel sheets overlap for 1-9 December 2010; without spotting this, that period would be counted twice.</li>
+            <li>The two largest orders in the data (80,995 and 74,215 units) were cancelled within minutes; keeping
+              cancellations as negative revenue makes them cancel out automatically.</li>
+            <li>The shop trades on Sundays but almost never on Saturdays.</li>
+            <li id="discoveryLowest"></li>
+          </ul>
+        </div>
+      </div>
+
+      <div class="card">
+        <h2 class="card-title"><span class="ic green">✓</span>Business recommendations</h2>
+        <div class="reco-grid">
+          <div class="reco"><strong>Prepare early for the Q4 peak</strong><p>Build stock of best-selling Christmas and home-decor lines by August, because revenue rises sharply from September and peaks in November.</p></div>
+          <div class="reco"><strong>Protect top customers</strong><p>About a fifth of customers bring in roughly three-quarters of revenue. A loyalty or account-manager programme for them is the safest way to protect income.</p></div>
+          <div class="reco"><strong>Win back one-time buyers</strong><p>Over a quarter of customers ordered only once. Follow-up offers to first-time buyers could raise repeat-purchase rates.</p></div>
+          <div class="reco"><strong>Grow export markets</strong><p>Overseas customers place much larger orders. Ireland, the Netherlands, Germany and France are proven markets worth targeted marketing.</p></div>
+          <div class="reco"><strong>Investigate cancellations</strong><p>About one in six invoices is a cancellation. Review the most-cancelled products for quality, description or delivery problems.</p></div>
+          <div class="reco"><strong>Record customer IDs</strong><p>Almost a quarter of rows have no Customer ID. Requiring an account or email at checkout would make customer analysis more complete.</p></div>
+        </div>
+      </div>
+
+      <div class="grid-2">
+        <div class="card">
+          <h2 class="card-title"><span class="ic red">!</span>Limitations</h2>
+          <ul class="checklist warn">
+            <li>The data comes from a single UK retailer, so results may not apply to other businesses.</li>
+            <li>December 2011 is incomplete (data ends on 9 December), so it is left out of year-on-year comparisons.</li>
+            <li>Customer-level results only include rows with a Customer ID.</li>
+            <li>No cost or profit data is available, so the analysis is about revenue, not profitability.</li>
+            <li>Exact duplicate rows were removed; a few could have been genuine repeated scans.</li>
+            <li>The analysis is descriptive. It shows patterns and associations, not causes.</li>
+          </ul>
+        </div>
+        <div class="card highlight">
+          <h2 class="card-title"><span class="ic blue">◆</span>Final conclusion</h2>
+          <p id="conclusion"></p>
+        </div>
+      </div>
+    </section>
+
+    <!-- ================= PAGE 6: ABOUT ================= -->
+    <section class="page" id="page-about">
+      <header class="page-head">
+        <span class="eyebrow">Page 6</span>
+        <h1>About the Project</h1>
+      </header>
+
+      <div class="grid-2">
+        <div class="card">
+          <h2 class="card-title">Project description</h2>
+          <p><strong>RetailScope</strong> is a Foundation of Data Science capstone that takes a large, messy, real-world
+            sales file and turns it into a clean dataset, a set of statistical findings and an easy-to-use website.
+            The project shows the full workflow a data scientist follows: understanding the data, cleaning it carefully
+            and honestly, exploring it, visualising it and communicating the results.</p>
+          <h3>Objectives</h3>
+          <ul class="checklist">
+            <li>Apply Pandas for real data cleaning and transformation.</li>
+            <li>Use descriptive statistics to summarise business data.</li>
+            <li>Create clear, labelled charts with Matplotlib.</li>
+            <li>Present the work in a static website without any framework.</li>
+          </ul>
+        </div>
+        <div class="card">
+          <h2 class="card-title">Technologies used</h2>
+          <div class="tech-grid">
+            <div class="tech"><strong>Python 3</strong><small>Scripts and pipeline</small></div>
+            <div class="tech"><strong>Pandas</strong><small>Cleaning and analysis</small></div>
+            <div class="tech"><strong>Matplotlib</strong><small>All charts (PNG)</small></div>
+            <div class="tech"><strong>openpyxl</strong><small>Lets Pandas read .xlsx</small></div>
+            <div class="tech"><strong>HTML5</strong><small>Page structure</small></div>
+            <div class="tech"><strong>CSS3</strong><small>Dark theme, responsive layout</small></div>
+            <div class="tech"><strong>JavaScript</strong><small>Navigation, filters, search</small></div>
+            <div class="tech"><strong>GitHub Pages</strong><small>Free static hosting</small></div>
+          </div>
+          <p class="note">No NumPy imports, Seaborn, Plotly, Bootstrap or JavaScript frameworks are used.</p>
+        </div>
+      </div>
+
+      <div class="grid-2">
+        <div class="card">
+          <h2 class="card-title">Dataset source</h2>
+          <p>Chen, D. (2012). <em>Online Retail II</em> [Dataset]. UCI Machine Learning Repository.
+            <a href="https://doi.org/10.24432/C5CG6D" target="_blank" rel="noopener">https://doi.org/10.24432/C5CG6D</a></p>
+          <p class="muted">All transactions between 01/12/2009 and 09/12/2011 for a UK-based, registered, non-store online
+            retailer that mainly sells unique all-occasion giftware. Many customers are wholesalers.
+            Licensed under CC BY 4.0.</p>
+        </div>
+        <div class="card">
+          <h2 class="card-title">Methodology</h2>
+          <ol class="steps-small">
+            <li>Load both Excel sheets with <code>pd.read_excel</code>.</li>
+            <li>Profile the data: shape, types, missing values, duplicates.</li>
+            <li>Clean: remove overlap and duplicates, fix types and names, classify transactions, flag outliers.</li>
+            <li>Derive Revenue and date features; export the cleaned CSV.</li>
+            <li>Analyse with groupby, pivot tables, quantiles, correlation and Pareto analysis.</li>
+            <li>Plot with Matplotlib, export PNGs and a small <code>data.js</code> file for the website.</li>
+          </ol>
+        </div>
+      </div>
+
+      <div class="card">
+        <h2 class="card-title">Student information</h2>
+        <table class="kv student">
+          <tr><th>Student name</th><td>[Your Name]</td></tr>
+          <tr><th>Enrolment / Roll no.</th><td>[Your Roll Number]</td></tr>
+          <tr><th>Programme</th><td>BCA - Artificial Intelligence &amp; Data Science</td></tr>
+          <tr><th>Subject</th><td>Foundation of Data Science</td></tr>
+          <tr><th>Mentor / Guide</th><td>[Mentor Name]</td></tr>
+          <tr><th>Institution</th><td>[University / College Name]</td></tr>
+          <tr><th>GitHub</th><td>[github.com/your-username]</td></tr>
+        </table>
+      </div>
+    </section>
+
+    <footer class="footer">
+      <span>RetailScope · Foundation of Data Science capstone</span>
+      <span id="genTime"></span>
+    </footer>
+  </main>
+
+  <!-- Lightbox for enlarging charts -->
+  <div class="lightbox" id="lightbox" hidden>
+    <button class="lb-close" id="lbClose" aria-label="Close">×</button>
+    <figure><img id="lbImg" alt=""><figcaption id="lbCap"></figcaption></figure>
+  </div>
+
+  <script src="data.js"></script>
+  <script src="script.js"></script>
+</body>
+</html>

@@ -1,0 +1,22 @@
+Column,Type,Source,Description,Example,Missing
+Invoice,text,Original,"Invoice number. Prefix 'C' = cancellation, 'A' = bad-debt adjustment.",489434,0
+StockCode,text,Original (upper-cased),Product code.,85048,0
+Description,text,Original (standardised),Product name; most frequent spelling per StockCode.,15CM CHRISTMAS GLASS BALL 20 LIGHTS,0
+Quantity,integer,Original,Units per line. Negative for cancellations and stock write-offs.,12,0
+InvoiceDate,datetime,Original,Date and time of the transaction.,2009-12-01 07:45:00,0
+Price,decimal (£),Original,Unit price in pounds sterling.,6.95,0
+CustomerID,text,Original (converted),Customer identifier; blank when not recorded.,13085,235151
+Country,text,Original (standardised),Customer's country.,United Kingdom,0
+Revenue,decimal (£),Derived,Quantity x Price. Negative for cancellations.,83.4,0
+TransactionType,text,Derived,"Sale, Cancellation, Stock Adjustment, Zero-Price Entry or Bad Debt Adjustment.",Sale,0
+IsCancelled,boolean,Derived,True when the invoice starts with 'C'.,False,0
+IsProduct,boolean,Derived,"False for postage, fees, manual entries, discounts, samples, test codes.",True,0
+HasCustomerID,boolean,Derived,True when CustomerID is present.,True,0
+QuantityOutlier,boolean,Derived,Product sale line with Quantity above the IQR limit (28).,False,0
+PriceOutlier,boolean,Derived,Product sale line with Price above the IQR limit (£8.45).,False,0
+Year,integer,Derived,Year of InvoiceDate.,2009,0
+Month,integer,Derived,Month number (1-12).,12,0
+YearMonth,text,Derived,"Year and month, e.g. 2011-11.",2009-12,0
+Quarter,text,Derived,"Year and quarter, e.g. 2011-Q4.",2009-Q4,0
+DayOfWeek,text,Derived,Weekday name.,Tuesday,0
+Hour,integer,Derived,Hour of the day (0-23).,7,0

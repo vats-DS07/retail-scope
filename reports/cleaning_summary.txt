@@ -1,0 +1,42 @@
+CLEANING SUMMARY - Online Retail II
+Generated: 2026-11-17 19:34
+
+Original rows (both sheets): 1,067,371
+Cleaned rows:                1,033,036
+Rows removed:                34,335 (overlap 22,523 + duplicates 11,812)
+
+Transaction types in the cleaned data:
+  Sale                   1,007,912
+  Cancellation              19,104
+  Stock Adjustment           3,393
+  Zero-Price Entry           2,621
+  Bad Debt Adjustment            6
+
+Cleaning steps:
+
+[4] Removed sheet-overlap rows (1-9 Dec 2010)  (1,067,371 -> 1,044,848)
+    Both Excel sheets contain the same transactions for 1-9 December 2010 (verified identical). Keeping both copies would double-count that period.
+
+[5] Removed exact duplicate rows  (1,044,848 -> 1,033,036)
+    Rows identical in every column (same invoice, product, quantity, price, timestamp and customer) are treated as accidental double entries.
+
+[6] Standardised column names and data types  (1,033,036 -> 1,033,036)
+    CustomerID converted from float (13085.0) to text ID (13085); Invoice and StockCode stored as text; StockCode upper-cased (e.g. 'm' -> 'M').
+
+[7a] Standardised country names  (1,033,036 -> 1,033,036)
+    EIRE -> Ireland, RSA -> South Africa, USA -> United States (18,371 rows). 'Unspecified' kept as-is.
+
+[7b] Standardised product descriptions  (1,033,036 -> 1,033,036)
+    597 stock codes had several spellings; each now uses its most frequent sales description. 3,909 missing descriptions were filled from the same StockCode (not invented); 366 with no match were labelled 'UNKNOWN'.
+
+[8] Classified rows into transaction types (no rows deleted)  (1,033,036 -> 1,033,036)
+    Negative quantities were NOT blindly deleted. 'C' invoices are cancellations/returns and are kept as negative revenue so they offset the original sale. Negative rows with price 0 are internal stock write-offs (damaged, lost). 'A' invoices are bad-debt accounting entries. Postage, fees and manual codes are flagged IsProduct = False.
+
+[9] Created derived columns  (1,033,036 -> 1,033,036)
+    Revenue = Quantity x Price (negative for cancellations). Date parts allow monthly, weekday and hourly analysis.
+
+[10] Kept rows with missing CustomerID (flagged)  (1,033,036 -> 1,033,036)
+    235,151 rows have no CustomerID (guest or unrecorded purchases). They are real sales, so they stay in revenue, product and country analysis but are excluded from customer-level analysis. No IDs were invented.
+
+[11] Flagged outliers with the IQR rule (kept, not deleted)  (1,033,036 -> 1,033,036)
+    Quantity > 28 units flags 53,019 sale lines; price > £8.45 flags 75,064. This is a wholesale business, so large orders are genuine and are kept. The two extreme orders (80,995 and 74,215 units) were each cancelled the same day; because cancellations are kept as negative revenue they cancel out in net figures.

@@ -1,0 +1,52 @@
+EDA SUMMARY - Online Retail II
+Generated: 17 Nov 2026, 19:34
+
+KPIs (all data):
+  net_revenue              18,927,435.65
+  gross_sales              19,643,861.62
+  cancelled_value          716,425.97
+  orders                   39,516
+  customers                5,852
+  countries                43
+  products                 4,724
+  units_sold               11,188,044
+  net_units                10,720,305
+  avg_order_value          497.11
+  median_order_value       301.23
+  cancellation_rate        15.78
+  cancellation_value_rate  3.65
+  cancelled_invoices       7,405
+  repeat_customer_rate     72.35
+  items_per_order          25.40
+
+Descriptive statistics:
+                  Variable   Count    Mean  Median      Std      Min     Q1      Q3       Max  Skewness
+         Quantity per line 1003340   11.15    4.00   128.74     1.00   1.00   12.00  80995.00    453.21
+            Unit price (£) 1003340    3.34    2.10     4.75     0.03   1.25    4.13   1157.15     41.09
+          Line revenue (£) 1003340   19.58   10.08   199.98     0.06   4.13   17.70 168469.60    661.73
+           Order value (£)   39516  497.11  301.23  1460.34     0.19 150.32  484.40 168469.60     50.55
+           Items per order   39516   25.39   15.00    42.61     1.00   6.00   29.00   1112.00      7.18
+       Orders per customer    5852    6.25    3.00    12.75     1.00   1.00    7.00    373.00     12.04
+Net spend per customer (£)    5852 2795.63  840.25 13825.26 -1343.24 330.94 2172.03 578408.64     26.82
+
+Spearman correlation (customer level):
+                  Recency  Frequency  Monetary  Units  AvgOrderValue  DistinctProducts  Tenure
+Recency              1.00      -0.56     -0.51  -0.51          -0.17             -0.46   -0.57
+Frequency           -0.56       1.00      0.86   0.82           0.21              0.72    0.88
+Monetary            -0.51       0.86      1.00   0.94           0.65              0.78    0.76
+Units               -0.51       0.82      0.94   1.00           0.61              0.76    0.73
+AvgOrderValue       -0.17       0.21      0.65   0.61           1.00              0.42    0.21
+DistinctProducts    -0.46       0.72      0.78   0.76           0.42              1.00    0.66
+Tenure              -0.57       0.88      0.76   0.73           0.21              0.66    1.00
+
+Key findings:
+- Strong Christmas seasonality: September to November produced 36.2% of 2010 revenue. November is the top month in both years (£1,394,602 in 2010 and £1,427,125 in 2011).
+- Stable year-on-year business: Jan-Nov revenue moved from £8,377,774 (2010) to £8,572,828 (2011), a change of +2.3%.
+- Heavy dependence on the UK: The United Kingdom provides 85.4% of net revenue; Ireland, Netherlands and Germany are the largest export markets.
+- Export customers place bigger orders: Average order value in the Netherlands is £2,545 compared with £464 in the UK, showing that overseas buyers are mostly large wholesalers.
+- 80/20 customer pattern: The top 20% of customers generate 76.7% of identified-customer revenue, while 27.6% of customers ordered only once.
+- Long-tail product catalogue: 4,724 products were sold; the top 10 account for only 7.6% of revenue. The best seller is 'Regency Cakestand 3 Tier'.
+- Cancellations are significant: 15.8% of invoices are cancellations, removing £716,426 (3.6% of gross sales).
+- Weekday, office-hours business: Sales peak on Thursday and at 12:00; Saturday trading is almost zero, which fits a business-to-business wholesaler.
+- Skewed order values: The median order is £301 but the mean is £497; a small number of very large orders pull the average up.
+- Missing customer IDs matter: 235,151 rows have no Customer ID; these rows still carry 13.6% of net revenue, so customer-level results describe identified customers only.
